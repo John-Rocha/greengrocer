@@ -12,7 +12,7 @@ class SignInScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              color: Colors.red,
+              color: Colors.green,
             ),
           ),
           Expanded(
@@ -28,8 +28,16 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               child: Column(
-                children: const [
-                  CustomTextField(),
+                children: [
+                  CustomTextField(
+                    label: 'E-mail',
+                    icon: Icons.email,
+                  ),
+                  CustomTextField(
+                    label: 'Senha',
+                    isSecret: true,
+                    icon: Icons.lock,
+                  ),
                 ],
               ),
             ),
