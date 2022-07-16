@@ -156,7 +156,8 @@ class SignInScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed('/signup'),
                         child: const Text(
                           'Criar conta',
                           style: TextStyle(

@@ -6,7 +6,7 @@ class AppRoutes {
   static Map<String, WidgetBuilder> get appRoutes {
     return {
       '/login': (context) => const SignInScreen(),
-      '/signup': (context) => const SignUpScreen(),
+      '/signup': (context) => SignUpScreen(),
     };
   }
 }
