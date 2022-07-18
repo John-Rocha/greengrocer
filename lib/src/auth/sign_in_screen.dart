@@ -105,7 +105,10 @@ class SignInScreen extends StatelessWidget {
                             fontSize: 18,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed('/base_screen');
+                        },
                         child: const Text('Entrar'),
                       ),
                     ),
