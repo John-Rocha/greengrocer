@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
-
 import 'package:greengrocer/src/models/item_model.dart';
 import 'package:greengrocer/src/pages/product/product_screen.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
 class ItemTile extends StatelessWidget {
-  ItemTile({
+  const ItemTile({
     Key? key,
     required this.item,
   }) : super(key: key);
 
   final ItemModel item;
-  UtilsServices utilsServices = UtilsServices();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,10 @@ class ItemTile extends StatelessWidget {
                 children: [
                   // Imagem
                   Expanded(
-                    child: Image.asset(item.imgUrl),
+                    child: Hero(
+                      tag: item.imgUrl,
+                      child: Image.asset(item.imgUrl),
+                    ),
                   ),
 
                   // Nome
@@ -55,7 +56,7 @@ class ItemTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        utilsServices.priceToCurrency(item.price),
+                        UtilsServices.priceToCurrency(item.price),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
