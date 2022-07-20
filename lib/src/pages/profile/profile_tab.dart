@@ -22,9 +22,11 @@ class ProfileTab extends StatelessWidget {
       body: ListView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
-        children: const [
+        children: [
           // Email
           CustomTextField(
+            isReadOnly: true,
+            initialValue: appData.user.email,
             label: 'E-mail',
             inputType: TextInputType.emailAddress,
             icon: Icons.email,
@@ -32,12 +34,16 @@ class ProfileTab extends StatelessWidget {
 
           // Nome
           CustomTextField(
+            isReadOnly: true,
+            initialValue: appData.user.name,
             label: 'Nome',
             icon: Icons.person,
           ),
 
           // Celular
           CustomTextField(
+            isReadOnly: true,
+            initialValue: appData.user.phone,
             label: 'Celular',
             inputType: TextInputType.number,
             icon: Icons.phone,
@@ -45,7 +51,10 @@ class ProfileTab extends StatelessWidget {
 
           // CPF
           CustomTextField(
+            isReadOnly: true,
+            initialValue: appData.user.cpf,
             label: 'CPF',
+            isSecret: true,
             inputType: TextInputType.number,
             icon: Icons.copy,
           ),
