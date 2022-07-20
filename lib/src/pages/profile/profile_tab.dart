@@ -1,8 +1,8 @@
 // ignore_for_file: library_prefixes
 
 import 'package:flutter/material.dart';
-import 'package:greengrocer/src/pages/commom_widgets/custom_text_field.dart';
 import 'package:greengrocer/src/data/app_data.dart' as appData;
+import 'package:greengrocer/src/pages/commom_widgets/custom_text_field.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -60,6 +60,21 @@ class ProfileTab extends StatelessWidget {
           ),
 
           // Botão para atualizar a senha
+          SizedBox(
+            height: 50,
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(
+                  color: Colors.green,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              onPressed: () {},
+              child: const Text('Atualizar senha'),
+            ),
+          ),
         ],
       ),
     );
