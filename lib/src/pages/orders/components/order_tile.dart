@@ -24,6 +24,7 @@ class OrderTile extends StatelessWidget {
           dividerColor: Colors.transparent,
         ),
         child: ExpansionTile(
+          initiallyExpanded: order.status == 'pending_payment',
           childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           title: Column(
             mainAxisSize: MainAxisSize.min,
@@ -40,16 +41,18 @@ class OrderTile extends StatelessWidget {
             ],
           ),
           children: [
-            SizedBox(
-              height: 150,
+            IntrinsicHeight(
               child: Row(
                 children: [
                   Expanded(
                     flex: 3,
-                    child: ListView(
-                        children: order.items.map((orderItem) {
-                      return _OrderItemWidget(orderItem: orderItem);
-                    }).toList()),
+                    child: SizedBox(
+                      height: 150,
+                      child: ListView(
+                          children: order.items.map((orderItem) {
+                        return _OrderItemWidget(orderItem: orderItem);
+                      }).toList()),
+                    ),
                   ),
                   VerticalDivider(
                     color: Colors.grey.shade300,
@@ -83,23 +86,26 @@ class _OrderItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        children: [
-          Text(
-            '${orderItem.quantity} ${orderItem.item.unit} ',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: Row(
+          children: [
+            Text(
+              '${orderItem.quantity} ${orderItem.item.unit} ',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Expanded(
-            child: Text(orderItem.item.itemName),
-          ),
-          Text(
-            UtilsServices.priceToCurrency(orderItem.item.price),
-          ),
-        ],
+            Expanded(
+              child: Text(orderItem.item.itemName),
+            ),
+            Text(
+              UtilsServices.priceToCurrency(orderItem.item.price),
+            ),
+          ],
+        ),
       ),
     );
   }
