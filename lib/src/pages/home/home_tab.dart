@@ -3,8 +3,8 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
-import 'package:greengrocer/src/pages/home/components/category_tile.dart';
 import 'package:greengrocer/src/data/app_data.dart' as appData;
+import 'package:greengrocer/src/pages/home/components/category_tile.dart';
 import 'package:greengrocer/src/pages/home/components/item_tile.dart';
 
 class HomeTab extends StatefulWidget {

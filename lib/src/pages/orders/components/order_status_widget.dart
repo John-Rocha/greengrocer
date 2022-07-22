@@ -28,7 +28,7 @@ class OrderStatusWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _StatusDot(
+        const _StatusDot(
           isActive: true,
           title: 'Pedido confirmado',
         ),
