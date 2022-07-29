@@ -103,22 +103,39 @@ class _HomeTabState extends State<HomeTab> {
           Container(
             height: 40,
             padding: const EdgeInsets.only(left: 25),
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: appData.categories.length,
-              separatorBuilder: (_, index) => const SizedBox(width: 10),
-              itemBuilder: (_, index) {
-                return CategoryTile(
-                  category: appData.categories[index],
-                  isSelected: appData.categories[index] == selectedCategory,
-                  onPressed: () {
-                    setState(() {
-                      selectedCategory = appData.categories[index];
-                    });
-                  },
-                );
-              },
-            ),
+            child: !isLoading
+                ? ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: appData.categories.length,
+                    separatorBuilder: (_, index) => const SizedBox(width: 10),
+                    itemBuilder: (_, index) {
+                      return CategoryTile(
+                        category: appData.categories[index],
+                        isSelected:
+                            appData.categories[index] == selectedCategory,
+                        onPressed: () {
+                          setState(() {
+                            selectedCategory = appData.categories[index];
+                          });
+                        },
+                      );
+                    },
+                  )
+                : ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: List.generate(
+                      appData.categories.length,
+                      (index) => Container(
+                        alignment: Alignment.center,
+                        margin: const EdgeInsets.only(right: 12),
+                        child: CustomShimmer(
+                          height: 20,
+                          width: 80,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                  ),
           ),
           Expanded(
             child: !isLoading
