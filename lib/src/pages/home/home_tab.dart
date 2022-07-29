@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/data/app_data.dart' as appData;
 import 'package:greengrocer/src/pages/commom_widgets/app_name_widget.dart';
+import 'package:greengrocer/src/pages/commom_widgets/custom_shimmer.dart';
 import 'package:greengrocer/src/pages/home/components/category_tile.dart';
 import 'package:greengrocer/src/pages/home/components/item_tile.dart';
 
@@ -17,6 +18,21 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   String selectedCategory = 'Frutas';
+
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      const Duration(seconds: 3),
+      () {
+        setState(() {
+          isLoading = false;
+        });
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,22 +121,39 @@ class _HomeTabState extends State<HomeTab> {
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 9 / 11.5,
-              ),
-              itemCount: appData.items.length,
-              itemBuilder: (_, index) {
-                return ItemTile(
-                  item: appData.items[index],
-                );
-              },
-            ),
+            child: !isLoading
+                ? GridView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 9 / 11.5,
+                    ),
+                    itemCount: appData.items.length,
+                    itemBuilder: (_, index) {
+                      return ItemTile(
+                        item: appData.items[index],
+                      );
+                    },
+                  )
+                : GridView.count(
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 9 / 11.5,
+                    children: List.generate(
+                      appData.items.length,
+                      (index) => CustomShimmer(
+                        height: double.infinity,
+                        width: double.infinity,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    )),
           ),
         ],
       ),
